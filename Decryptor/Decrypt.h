@@ -30,8 +30,6 @@ struct ImageSectionInfo
     }
 };
 
-typedef BOOLEAN(__stdcall* t_RtlDispatchException)(PEXCEPTION_RECORD exceptionRecord, PCONTEXT contextRecord);
-
 class LeagueDecrypt {
 public:
 
