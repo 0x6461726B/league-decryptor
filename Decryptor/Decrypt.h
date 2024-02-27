@@ -42,7 +42,6 @@ public:
 
  
 private:
-    t_RtlDispatchException fn_RtlDispatchException;
     SYSTEM_INFO sysInfo;
     void ProcessSection(uintptr_t sectionStart, size_t sectionSize, LeagueDecryptData& ldd);
     

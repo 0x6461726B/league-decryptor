@@ -59,9 +59,8 @@ void LeagueDecrypt::ProcessSection(uintptr_t sectionStart, size_t sectionSize, L
     uintptr_t currentAddress = sectionStart;
     uintptr_t sectionEnd = sectionStart + sectionSize;
 
-    // LOG("Current address %p", currentAddress);
+    
     while (currentAddress < sectionEnd) {
-        // Query the memory region starting from the current address
         if (VirtualQuery(reinterpret_cast<LPCVOID>(currentAddress), &mbi, sizeof(mbi)) == 0) {
             break;
         }
@@ -75,24 +74,21 @@ void LeagueDecrypt::ProcessSection(uintptr_t sectionStart, size_t sectionSize, L
 
            
             for (; page < pageEnd; page += sysInfo.dwPageSize) { 
-                if (decrypt(reinterpret_cast<void*>(page))) {
-                    // LOG("Decrypted %p", page);
+                if (decrypt(reinterpret_cast<void*>(page))) {         
                     ldd.totalSuccessDecrypted++;
                 }
                 else {
-                    // LOG("Failed to decrypt %p", page);
                     ldd.totalFailedDecrypted++;
                 }
             }
         }
         else {
-            ldd.totalSuccess_PAGE_NOACCESS;
-            // LOG("Skipping region: State %lu, Protect %lu", mbi.State, mbi.Protect);
+            ldd.totalSuccess_PAGE_NOACCESS;        
         }
 
 
-        // Move to the next memory region
-        currentAddress = reinterpret_cast<uintptr_t>(mbi.BaseAddress) + mbi.RegionSize;
+      
+        currentAddress = reinterpret_cast<uintptr_t>(mbi.BaseAddress) + mbi.RegionSize; // go next
 
         if (reinterpret_cast<uintptr_t>(mbi.BaseAddress) >= currentAddress) {
             break;
